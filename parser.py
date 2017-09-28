@@ -8,7 +8,7 @@ bucket = "magic-bucket"
 videoext = ["mkv", "mp4", "mov", "avi", "wmv", "mpeg", "rmvb", "mpg", "mp5", "webm", "flv", "m4v"]
 filelist = []
 
-magicbucket = json.load(open('magicbucket4.json'))
+magicbucket = json.load(open('magicbucket6.json'))
 
 ##Only keep video files
 #print(json.dumps(magicbucket, indent=4)) #debug test
