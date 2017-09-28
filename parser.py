@@ -32,11 +32,22 @@ with open('download.txt', 'a') as file:
 			file.write(item["fileName"]+"\n") #keep a logfile
 			filelist.append(item["fileName"])
 
-backblazesource = 'backblaze' + ':' + "\"" + bucket + "/" 
+backblazesource = 'backblaze' + ':' + "" + bucket + "/" 
+
+
+
+#omi = r'/home/orlando/.linuxbrew/bin/rclone copy backblaze:"magic-bucket/videos/youtube/'
+#omi = omi + "'RAW'"
+#omi = omi + r' Footage of Chris Kenner- Out Of Control-DM6zuzlaUVA.mkv" videos'
+#s = "backblaze:magic-bucket/videos/youtube/'RAW' Footage of Chris Kenner- Out Of Control-DM6zuzlaUVA.mkv"
+#s = s.replace(" ", "\ ")
+#subprocess.call(["sh", "-c", omi])
+#subprocess.call(["rclone", "copy" , s, "videos"])
+
 	
 for i in filelist:
 	print('rclone copy ' + backblazesource + i + "\"" + " videos")
-	subprocess.call(["rclone", "copy" , backblazesource + i + "\"", "videos"]) 
+	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
 
 
 #s = subprocess.check_output(["rclone", "copy", backblazestring, "videos"])
