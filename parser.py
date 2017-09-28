@@ -1,5 +1,6 @@
 import json
 import subprocess
+import os
 #from subprocess import call
 #only extract files with these extentions
 backblaze = "backblaze"
@@ -45,9 +46,13 @@ backblazesource = 'backblaze' + ':' + "" + bucket + "/"
 #subprocess.call(["rclone", "copy" , s, "videos"])
 
 	
-for i in filelist:
-	print('rclone copy ' + backblazesource + i + "\"" + " videos")
-	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
+#for i in filelist:
+#	print('rclone copy ' + backblazesource + i + "\"" + " videos")
+#	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
+
+videos = os.listdir("videos")
+for i in videos:
+	subprocess.call(["vcs", "videos/" + i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", "caps/" +i + ".jpg"])
 
 
 #s = subprocess.check_output(["rclone", "copy", backblazestring, "videos"])
