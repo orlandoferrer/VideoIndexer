@@ -29,5 +29,5 @@ magicbucket = json.load(open('magicbucket.json'))
 #call(["vcs", "A New World-PBDD5Wv6O9U.webm", "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", "A new world.jpg"])
 
 #working
-#for i in videolist:
-#	call(["vcs", i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", i + ".jpg"])
+for i in videolist:
+	call(["vcs", i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", i + ".jpg"])
