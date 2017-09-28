@@ -8,7 +8,7 @@ bucket = "magic-bucket"
 videoext = ["mkv", "mp4", "mov", "avi", "wmv", "mpeg", "rmvb", "mpg", "mp5", "webm", "flv", "m4v"]
 filelist = []
 
-magicbucket = json.load(open('magicbucket6.json'))
+magicbucket = json.load(open('magicbucket7.json'))
 
 ##Only keep video files
 #print(json.dumps(magicbucket, indent=4)) #debug test
@@ -50,18 +50,34 @@ for i in filelist:
 	print('rclone copy ' + backblazesource + i + "\"" + " videos")
 	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
 
+htmlPage = open('videos2.html', 'a+')
+htmlPage.write("<!doctype html> \
+<html lang=\"en\"> \
+<head> \
+  <meta charset=\"utf-8\"> \
+  <title>Video Indexer</title> \
+</head> \
+<body>")	
+
+
 videos = os.listdir("videos")
 for i in videos:
 	subprocess.call(["vcs", "videos/" + i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", "caps/" +i + ".jpg"])
+	#get timecode calling ffmpeg
+	process = subprocess.Popen(['ffmpeg',  '-i', 'videos/' + i], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	stdout, stderr = process.communicate()
+	outputstr = stdout.decode("utf-8")
+	timeptr = outputstr.find("Duration: ")
+	time = outputstr[timeptr:timeptr+21]
+	print(time)
+	htmlPage.write("File Name: " + i + "</br>" + "Duration: " + time)
+	htmlPage.write("<img src=\"caps/" + i + ".jpg\">") 
 
 
-#s = subprocess.check_output(["rclone", "copy", backblazestring, "videos"])
-#print(s)
+htmlPage.write("</body> \
+</html>")
 
-#subprocess.Popen('rclone copy ' + backblazestring + " videos", shell=True)
 
-#testlist = ["rclone", "copy", 'backblaze:"magic-bucket/videos/youtube/10-Card Poker Deal-EPhspnS0h_U.mkv\"', "videos"]
-#dirstring = "backblaze:\"magic-bucket//videos//youtube//10-Card Poker Deal-EPhspnS0h_U.mkv\""
 
 
 
