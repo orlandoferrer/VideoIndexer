@@ -8,7 +8,7 @@ bucket = "magic-bucket"
 videoext = ["mkv", "mp4", "mov", "avi", "wmv", "mpeg", "rmvb", "mpg", "mp5", "webm", "flv", "m4v"]
 filelist = []
 
-magicbucket = json.load(open('magicbucket7.json'))
+magicbucket = json.load(open('jsonfile.json'))
 
 ##Only keep video files
 #print(json.dumps(magicbucket, indent=4)) #debug test
@@ -34,17 +34,6 @@ with open('download.txt', 'a') as file:
 			filelist.append(item["fileName"])
 
 backblazesource = 'backblaze' + ':' + "" + bucket + "/" 
-
-
-
-#omi = r'/home/orlando/.linuxbrew/bin/rclone copy backblaze:"magic-bucket/videos/youtube/'
-#omi = omi + "'RAW'"
-#omi = omi + r' Footage of Chris Kenner- Out Of Control-DM6zuzlaUVA.mkv" videos'
-#s = "backblaze:magic-bucket/videos/youtube/'RAW' Footage of Chris Kenner- Out Of Control-DM6zuzlaUVA.mkv"
-#s = s.replace(" ", "\ ")
-#subprocess.call(["sh", "-c", omi])
-#subprocess.call(["rclone", "copy" , s, "videos"])
-
 	
 for i in filelist:
 	print('rclone copy ' + backblazesource + i + "\"" + " videos")
@@ -63,7 +52,7 @@ htmlPage.write("<!doctype html> \
 videos = os.listdir("videos")
 for i in videos:
 	subprocess.call(["vcs", "videos/" + i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", "caps/" +i + ".jpg"])
-	#get timecode calling ffmpeg
+	#get time calling ffmpeg
 	process = subprocess.Popen(['ffmpeg',  '-i', 'videos/' + i], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 	stdout, stderr = process.communicate()
 	outputstr = stdout.decode("utf-8")
@@ -78,9 +67,3 @@ htmlPage.write("</body> \
 </html>")
 
 
-
-
-
-
-#for i in filelist:
-#	call(["vcs", i, "-U0", "-n 20", "-c 5", "-H 200", "--autoaspect", "-o", i + ".jpg"])
