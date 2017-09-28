@@ -46,9 +46,9 @@ backblazesource = 'backblaze' + ':' + "" + bucket + "/"
 #subprocess.call(["rclone", "copy" , s, "videos"])
 
 	
-#for i in filelist:
-#	print('rclone copy ' + backblazesource + i + "\"" + " videos")
-#	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
+for i in filelist:
+	print('rclone copy ' + backblazesource + i + "\"" + " videos")
+	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
 
 videos = os.listdir("videos")
 for i in videos:
