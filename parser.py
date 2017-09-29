@@ -39,6 +39,7 @@ for i in filelist:
 	print('rclone copy ' + backblazesource + i + "\"" + " videos")
 	subprocess.call(["rclone", "copy" , backblazesource + i, "videos"]) 
 
+#build web page
 htmlPage = open('videos2.html', 'a+')
 htmlPage.write("<!doctype html> \
 <html lang=\"en\"> \
